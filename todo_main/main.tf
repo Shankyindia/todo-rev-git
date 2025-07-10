@@ -3,6 +3,11 @@ module "todo_rg" {
   rg_name  = "todo-rg"
   location = "East US"
 }
+module "todo_rg1" {
+  source = "../todo_infra/todo-rg"
+  rg_name  = "todo-rg1"
+  location = "East US"
+}
 module "todo_rg3" {
   source = "../todo_infra/todo-rg"
   rg_name  = "todo-rg3"
