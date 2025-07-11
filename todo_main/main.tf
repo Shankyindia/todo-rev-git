@@ -13,6 +13,11 @@ module "todo_rg3" {
   rg_name  = "todo-rg3"
   location = "East US"
 }
+module "todo_rg4" {
+  source = "../todo_infra/todo-rg"
+  rg_name  = "todo-rg4"
+  location = "East US"
+}
 module "todo_vnet" {
   depends_on = [module.todo_rg]
   source     = "../todo_infra/todo-vnet"
