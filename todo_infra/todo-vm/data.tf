@@ -7,14 +7,12 @@ data "azurerm_key_vault" "key_vault_todo" {
   name                = var.key_vault_name
   resource_group_name = var.rg_name
 }
-  
-
-data "azurerm_key_vault_secret" "secret1" {
-  name         = var.username_secret_name
+data "azurerm_key_vault_secret" "username" {
+  name         = var.username
   key_vault_id = data.azurerm_key_vault.key_vault_todo.id
 }
-data "azurerm_key_vault_secret" "secret2" {
-  name         = var.password_secret_name
+data "azurerm_key_vault_secret" "password" {
+  name         = var.password
   key_vault_id = data.azurerm_key_vault.key_vault_todo.id
 }
 data "azurerm_public_ip" "pip_todo" {

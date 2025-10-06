@@ -15,8 +15,8 @@ resource "azurerm_linux_virtual_machine" "todo_vm" {
   resource_group_name = var.rg_name
   location            = var.location
   size                = "Standard_F2"
-  admin_username      = data.azurerm_key_vault_secret.secret1.value
-  admin_password = data.azurerm_key_vault_secret.secret2.value
+  admin_username      = data.azurerm_key_vault_secret.username.value
+  admin_password      = data.azurerm_key_vault_secret.password.value
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.nic.id,
@@ -33,4 +33,13 @@ resource "azurerm_linux_virtual_machine" "todo_vm" {
     sku       = "22_04-lts"
     version   = "latest"
   }
+  custom_data = base64encode(<<-EOF
+              #!/bin/bash
+              sudo apt-get update -y
+              sudo apt-get install nginx -y
+              sudo systemctl enable nginx
+              sudo systemctl start nginx
+              echo "Hello from Terraform + Nginx!" | sudo tee /var/www/html/index.html
+              EOF
+  )
 }

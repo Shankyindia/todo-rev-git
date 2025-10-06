@@ -8,3 +8,7 @@ resource "azurerm_key_vault_secret" "secret" {
   value        = var.secret_value
   key_vault_id = data.azurerm_key_vault.key_vault_todo.id
 }
+
+# output "secret_name" {
+#   value = azurerm_key_vault_secret.secret.name
+# }
